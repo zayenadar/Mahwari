@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="PMOS and the Urdu words missing for it: a lexicon, a translation test and voices from a school support group.">
+<style>body{margin:0}</style>
+<title>Mahwari</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Nastaliq+Urdu:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: A deep teal hero carries the Urdu word; one four-colour scale (how well Urdu covers a term) runs through the lexicon, the translation test and the charts. */
+:root{
+  --bg:#F4F7F5; --surface:#FFFFFF; --surface-2:#E7EEEB; --fg:#14292B; --muted:#546A6E; --line:#D6E0DD;
+  --accent:#0E6B66; --accent-fg:#FFFFFF; --accent-soft:#D3EBE7;
+  --flow:#B8432F;
+  --band:#0F4C49; --band-fg:#F3F8F6; --band-muted:#B5D3CE;
+  --lv-direct:#0E7A70; --lv-formal:#4F6F9A; --lv-english:#B7790F; --lv-none:#B8432F;
+  --focus:#0E6B66;
+  --font-display:'Newsreader',Georgia,'Times New Roman',serif;
+  --font-body:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-ur:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq','Noto Naskh Arabic',serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1A1B; --surface:#142527; --surface-2:#1B3033; --fg:#E6F0EE; --muted:#93AAAD; --line:#27433F;
+    --accent:#5CC9BF; --accent-fg:#06201E; --accent-soft:#17403E;
+    --flow:#F0846F;
+    --band:#0F3836; --band-fg:#E9F3F1; --band-muted:#9CC2BC;
+    --lv-direct:#5CC9BF; --lv-formal:#8FB0DA; --lv-english:#F0BE62; --lv-none:#F0846F;
+    --focus:#5CC9BF;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1A1B; --surface:#142527; --surface-2:#1B3033; --fg:#E6F0EE; --muted:#93AAAD; --line:#27433F;
+  --accent:#5CC9BF; --accent-fg:#06201E; --accent-soft:#17403E;
+  --flow:#F0846F;
+  --band:#0F3836; --band-fg:#E9F3F1; --band-muted:#9CC2BC;
+  --lv-direct:#5CC9BF; --lv-formal:#8FB0DA; --lv-english:#F0BE62; --lv-none:#F0846F;
+  --focus:#5CC9BF;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font:17px/1.65 var(--font-body)}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.01em;line-height:1.12;text-wrap:balance;margin:0}
+h2{font-size:clamp(28px,4.6vw,40px)}
+h3{font-size:19px}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.narrow{max-width:720px}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.eyebrow{font:600 14px var(--font-body);color:var(--accent)}
+.eyebrow+h2{margin-top:8px}
+.lede{font-size:19px;color:var(--muted);max-width:62ch;margin-top:12px}
+.urdu{font-family:var(--font-ur);letter-spacing:0}
+.pad{padding-block:40px}
+
+/* header */
+.site{padding-block:18px 0}
+.brand{display:inline-flex;align-items:center;gap:10px;font:600 29px var(--font-display);color:var(--fg);text-decoration:none;letter-spacing:-.01em}
+.brand .ur{font:400 20px/2 var(--font-ur);color:var(--muted);letter-spacing:0}
+.tabs{display:flex;flex-wrap:wrap;gap:0 24px;margin-top:12px;border-bottom:1px solid var(--line)}
+.tabs a{padding:8px 0 11px;color:var(--muted);text-decoration:none;font-weight:500;font-size:16px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--fg)}
+.tabs a[aria-current="page"]{color:var(--fg);border-bottom-color:var(--accent)}
+
+/* shared */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:24px;min-width:0}
+.panel h3{margin-bottom:4px}
+.sub{font-size:15px;color:var(--muted);margin-bottom:16px}
+.btn{font:600 16px var(--font-body);padding:12px 20px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-fg);cursor:pointer}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.onband{background:var(--band-fg);color:var(--band);border-color:var(--band-fg)}
+.btn.ghost.onband{background:transparent;color:var(--band-fg);border-color:var(--band-muted)}
+a.btn{text-decoration:none;display:inline-block}
+.linkbtn{background:none;border:0;color:var(--accent);text-decoration:underline;font:inherit;font-size:14px;cursor:pointer;padding:6px 4px}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.notice{font-size:15px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;margin-top:40px;max-width:62ch}
+.seg{display:flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:8px;overflow:hidden;width:fit-content;max-width:100%}
+.seg label{position:relative;display:block;border-right:1px solid var(--line)}
+.seg label:last-child{border-right:0}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:block;padding:10px 16px;font-size:15px;font-weight:500;color:var(--muted);background:var(--surface);cursor:pointer}
+.seg input:checked+span{background:var(--accent);color:var(--accent-fg)}
+.seg input:focus-visible+span{outline:2px solid var(--focus);outline-offset:-3px}
+.seg .urdu{font-size:18px;line-height:1.5;padding-block:6px}
+label.field{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:15px}
+input[type=text],input[type=search],textarea,select{font:400 16px var(--font-body);color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:11px 12px;width:100%;max-width:100%}
+textarea{resize:vertical;min-height:96px}
+.ldot{width:10px;height:10px;border-radius:50%;background:var(--lv,var(--muted));flex:none;display:inline-block}
+.lv-direct,.r1{--lv:var(--lv-direct)}.lv-formal{--lv:var(--lv-formal)}.lv-english,.r2{--lv:var(--lv-english)}.lv-none,.r3{--lv:var(--lv-none)}.r0{--lv:var(--line)}
+.gapbar{display:flex;gap:3px;height:20px;border-radius:10px;overflow:hidden;margin:24px 0 16px}
+.gapbar i{display:block;height:100%;background:var(--lv)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 24px;font-size:15px}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend b{font:500 15px var(--font-body)}
+.sync{font-size:14px;color:var(--muted);min-height:22px}
+
+/* hero */
+.hero{background:var(--band);color:var(--band-fg);margin-top:18px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Cpath d='M22 1 L43 22 L22 43 L1 22 Z M22 11 L33 22 L22 33 L11 22 Z' fill='none' stroke='white' stroke-opacity='.07' stroke-width='1'/%3E%3C/svg%3E")}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:20px 40px;align-items:center;padding-block:48px 52px}
+.hero .eyebrow{color:var(--band-muted)}
+.hero h1{font-size:clamp(34px,5.4vw,56px);line-height:1.08;letter-spacing:-.015em;font-weight:500;margin-top:12px}
+.hero p.lead{font-size:19px;color:var(--band-muted);margin-top:18px;max-width:52ch}
+.hero .row{margin-top:26px}
+.hero-word{text-align:center}
+.hero-word .urdu{display:block;font-size:clamp(72px,9.5vw,108px);line-height:2.4;font-weight:400;color:var(--band-fg)}
+.hero-word small{display:block;font:500 14px var(--font-body);color:var(--band-muted)}
+
+/* home */
+.fig{padding-block:44px 8px}
+.fig h2{max-width:22ch}
+.story{padding-block:44px 16px}
+.story h2{font-size:clamp(32px,6vw,52px);line-height:1.08;letter-spacing:-.015em;font-weight:500;margin-top:10px;max-width:20ch}
+.hero-ur{font-size:clamp(20px,4vw,28px);line-height:2.2;color:var(--accent);margin-top:10px;font-weight:500}
+.langseg{margin-top:24px}
+.prose{max-width:60ch;margin-top:26px;font-family:var(--font-display);font-size:20px;line-height:1.6}
+.prose h3{margin-bottom:12px}
+.prose p+p{margin-top:16px}
+.prose.ur{font-family:var(--font-ur);font-size:19px;line-height:2.7}
+.prose.ur h3{font:500 26px/1.9 var(--font-ur);letter-spacing:0}
+.here{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:28px;padding-block:36px 8px}
+.here div{border-top:2px solid var(--fg);padding-top:14px}
+.here h3{margin-bottom:6px}
+.here p{color:var(--muted);font-size:16px}
+
+/* words */
+.wtools{margin-top:26px;display:flex;flex-direction:column;gap:14px}
+.wtools input[type=search]{font-size:18px;padding:14px 16px;border-radius:10px;background:var(--surface)}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.fbtn{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 14px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:8px;font:500 14px var(--font-body);cursor:pointer}
+.fbtn[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));gap:6px 56px;margin-top:8px}
+.wgroup{grid-column:1/-1;font:600 26px var(--font-display);color:var(--fg);margin-top:30px;padding-bottom:4px}
+.wc{border-top:1px solid var(--line);padding:20px 0 14px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.lvl{display:inline-flex;align-items:center;gap:8px;font:500 12px var(--font-body);color:var(--muted)}
+.wc-terms{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.wc h3{font-size:22px;min-width:0}
+.wc .tr{text-align:right;min-width:0}
+.wc .u{font-size:30px;line-height:1.9;color:var(--accent);display:block}
+.wc .ro{font:400 14px var(--font-body);color:var(--muted);display:block}
+.wc .noterm{font-size:14px;color:var(--muted);font-style:italic;display:block;padding-top:6px}
+.say{display:flex;flex-wrap:wrap;gap:6px}
+.say span{background:var(--surface-2);border-radius:6px;padding:3px 10px;font-size:14px}
+.say small{font:400 11px var(--font-body);color:var(--muted);margin-left:6px}
+.wc .cap{font:500 11px var(--font-body);color:var(--muted);margin-bottom:6px}
+.why{font-size:15px;color:var(--muted)}
+.mine summary{font-size:14px;font-weight:600;color:var(--accent);cursor:pointer;font-family:var(--font-body)}
+.mine .addrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.mine .addrow input{flex:1 1 150px;min-width:0}
+.mine .addrow select{flex:0 1 150px;min-width:0}
+.mylist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+.mylist li{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:15px}
+.mylist small{font:400 11px var(--font-body);color:var(--muted);margin-left:6px}
+.mylist button{background:none;border:0;color:var(--muted);cursor:pointer;font-size:18px;line-height:1;padding:4px 8px}
+.exports{margin-top:30px}
+
+/* research */
+.rsec{padding-block:36px 0}
+.rsec>h3{font-size:26px;margin-bottom:10px}
+.four{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px 32px;margin-top:6px}
+.four div{border-top:2px solid var(--fg);padding-top:12px}
+.four h4{font-size:18px;margin-bottom:6px}
+.four p,.rsec li{color:var(--muted);font-size:16px}
+.rsec ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.mtres{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px;margin-top:18px}
+.mtres h4{font-size:22px}
+.mtres .res{border-top:2px solid var(--fg);padding-top:12px;min-width:0}
+.mtres .gapbar{height:16px;margin:12px 0 10px}
+.mtres .legend{font-size:14px;gap:6px 16px}
+.mt-tools{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;justify-content:space-between;margin-top:30px}
+.mt-list{display:flex;flex-direction:column;margin-top:14px}
+.mt{border-top:1px solid var(--line);padding:22px 0 16px;display:grid;gap:12px;min-width:0;max-width:760px}
+.mt .src{font:600 19px var(--font-display)}
+.mt .out{font-size:24px;line-height:2.1;overflow-wrap:anywhere}
+.mt textarea.out-in{font-family:var(--font-ur);font-size:20px;line-height:2;min-height:72px}
+.mt .ctl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:8px;font:500 12px var(--font-body);color:var(--muted)}
+.skels{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.skels span{background:var(--surface-2);border-radius:6px;padding:4px 10px;font:400 14px var(--font-body)}
+.keyline{font:500 15px var(--font-body);margin-bottom:10px}
+.hits{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:4px;font-size:15px}
+.reading{list-style:none;padding:0;margin:0}
+.reading li{padding:12px 0;border-top:1px solid var(--line)}
+.reading a{font-weight:600}
+.reading .org{display:block;font:400 12px var(--font-body);color:var(--muted);margin-top:2px}
+
+/* voices */
+.vgroup{font-size:26px;margin-top:40px}
+.voices{columns:2 320px;column-gap:56px;margin-top:10px}
+.voices.one{columns:auto;max-width:62ch}
+.voice{break-inside:avoid;border-top:1px solid var(--line);padding:18px 0 4px;margin:0 0 14px}
+.voice h4{font-size:21px;margin-bottom:10px}
+.voice p{font-family:var(--font-display);font-size:19px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+.voice .who{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;font:500 12px var(--font-body);color:var(--muted)}
+.empty{border:1px dashed var(--line);border-radius:8px;padding:28px;color:var(--muted);margin-top:26px;max-width:62ch}
+
+.foot{border-top:1px solid var(--line);margin-top:56px;padding-block:18px 48px;font-size:14px;color:var(--muted)}
+.foot .wrap{display:flex;flex-direction:column;gap:8px}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:calc(100% - 32px);z-index:60}
+#toast.show{opacity:1}
+
+@media (max-width:760px){
+  .hero .wrap{grid-template-columns:minmax(0,1fr);padding-block:32px 40px}
+  .hero-word{order:-1}
+  .hero-word .urdu{font-size:72px;line-height:2.3}
+  .panel{padding:18px}
+  .tabs{gap:0 18px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="Mahwari, go to the start">
+      <span>Mahwari</span>
+      <span class="ur" lang="ur" dir="rtl">ماہواری</span>
+    </a>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#home" data-tab="home">Home</a>
+      <a href="#words" data-tab="words">Words</a>
+      <a href="#research" data-tab="research">Research</a>
+      <a href="#voices" data-tab="voices">Voices</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HOME -->
+  <section id="view-home" data-view="home" hidden>
+    <div class="hero">
+      <div class="wrap">
+        <div>
+          <p class="eyebrow">Words for a diagnosis</p>
+          <h1>When a condition has no word in your language, it is harder to ask for help.</h1>
+          <p class="lead">Mahwari is about PMOS, the condition formerly called PCOS, and the words Urdu does not have for it. It holds a lexicon, a test of how machine translation handles those words, and voices from a support group I had in school.</p>
+          <div class="row">
+            <a class="btn onband" href="#words">Browse the words</a>
+            <a class="btn ghost onband" href="#research">See the experiment</a>
+          </div>
+        </div>
+        <div class="hero-word">
+          <span class="urdu" lang="ur" dir="rtl">ماہواری</span>
+          <small>mahwari, the word for periods</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="fig">
+        <p class="eyebrow">The gap, counted</p>
+        <h2 id="gapHead"></h2>
+        <p class="lede" id="gapSub"></p>
+        <div class="gapbar" id="gapBar" role="img" aria-label="Share of terms by how well Urdu covers them"></div>
+        <div class="legend" id="gapLegend"></div>
+        <p class="small muted" style="margin-top:16px">This is my first pass at sorting the terms. It needs checking with Urdu speakers, and the sorting will change.</p>
+      </div>
+
+      <div class="story" id="story">
+        <p class="eyebrow">Why I made this</p>
+        <h2>I was never undisciplined. My body was working against me.</h2>
+        <p class="urdu hero-ur" id="heroLine" lang="ur" dir="rtl">مجھ میں نظم و ضبط کی کمی نہیں تھی۔ میرا جسم میرے خلاف کام کر رہا تھا۔</p>
+        <div class="seg langseg" role="radiogroup" aria-label="Language">
+          <label><input type="radio" name="lang" value="en" id="lang-en" checked><span>English</span></label>
+          <label><input type="radio" name="lang" value="ur" id="lang-ur"><span class="urdu" lang="ur">اردو</span></label>
+          <label><input type="radio" name="lang" value="ro" id="lang-ro"><span>Roman Urdu</span></label>
+        </div>
+        <div class="prose" id="story-en">
+            <p>Until I was ten, I was the thin kid. I could not gain weight no matter how many strawberry milkshakes I drank, and I drank a lot of them.</p>
+            <p>Then came puberty. My periods started at twelve, and so did the problems. Every month brought a week of bloating, intense pain and a list of other symptoms. I struggled, and I accepted it as my fate, because I thought it was normal. A few years later the pain became unbearable, and I went to a doctor. At fifteen I was told I had PCOS.</p>
+            <p>What was that? Polycystic ovarian syndrome. I understood that it meant many cysts and had something to do with my ovaries. But what was it really? What had I done wrong to get it? What medicine could I take to reverse it? Then I learned that no medicine reverses it, and that it has had little research and attention.</p>
+            <p>I spent hours on the internet reading biological terms I barely understood. I wanted to fix myself, because I could not yet accept that this was not something to fix. I had to find ways to live with it and to accept it as part of who I am. That was not easy among desi women who set the beauty standards, where to deviate from them felt like a sin.</p>
+            <p>The people around me did not know what it was. When I told a friend about my periods and how much I was struggling, she said, "Yeah, wearing a pad is uncomfortable, but periods don't hurt, right?" I walked on the treadmill for twenty minutes every day and saw no noticeable difference. For a long time I believed I lacked discipline. I did not. My body was working against me.</p>
+            <p>People say periods are a natural process that happens to every woman, and that is true. They are also a taboo. In my language, most of the words for this do not exist, or they are only said in whispers. You cannot easily describe PCOS in Urdu. My background is in languages and linguistics, so I know what that means. When there are no words for something, we cannot ask for help, and we cannot explain what is happening to us.</p>
+            <p>This is where I put that difficult diagnosis to use. I am studying the gap in the language, because it is the part of the problem I am equipped to work on.</p>
+          </div>
+          <div class="prose ur" id="story-ur" lang="ur" dir="rtl" hidden>
+            <h3>میں نے ماہواری کیوں بنائی</h3>
+            <p>دس سال کی عمر تک میں دبلی پتلی بچی تھی۔ میں جتنے بھی اسٹرابیری ملک شیک پی لیتی، میرا وزن نہیں بڑھتا تھا، اور میں بہت پیتی تھی۔</p>
+            <p>پھر بلوغت آئی۔ بارہ سال کی عمر میں میری ماہواری شروع ہوئی، اور اس کے ساتھ مسائل بھی۔ ہر مہینے ایک ہفتہ پیٹ پھولنے، شدید درد اور کئی دوسری علامات میں گزرتا۔ میں مشکل میں رہی، مگر میں نے اسے اپنی قسمت سمجھ کر قبول کر لیا، کیونکہ مجھے لگتا تھا کہ یہ معمول کی بات ہے۔ چند سال بعد درد ناقابلِ برداشت ہو گیا تو میں ڈاکٹر کے پاس گئی۔ پندرہ سال کی عمر میں مجھے بتایا گیا کہ مجھے پی سی او ایس ہے۔</p>
+            <p>یہ کیا تھا؟ پولی سسٹک اوویرین سنڈروم۔ میں اتنا سمجھی کہ اس کا مطلب بہت سی سسٹیں ہیں اور اس کا تعلق بیضہ دانیوں سے ہے۔ مگر یہ اصل میں تھا کیا؟ میں نے ایسا کیا غلط کیا تھا کہ مجھے یہ ہو گیا؟ کون سی دوا اسے ختم کر سکتی تھی؟ پھر مجھے معلوم ہوا کہ کوئی دوا اسے ختم نہیں کرتی، اور اس پر تحقیق اور توجہ بہت کم رہی ہے۔</p>
+            <p>میں نے گھنٹوں انٹرنیٹ پر حیاتیات کی وہ اصطلاحات پڑھیں جو مجھے مشکل سے سمجھ آتی تھیں۔ میں خود کو ٹھیک کرنا چاہتی تھی، کیونکہ اس وقت یہ ماننا مشکل تھا کہ یہ ٹھیک ہونے والی چیز نہیں۔ مجھے اس کے ساتھ جینے کے طریقے ڈھونڈنے تھے اور اسے اپنی شناخت کا حصہ ماننا تھا۔ یہ آسان نہیں تھا، کیونکہ اردگرد کی دیسی خواتین خوبصورتی کے معیار طے کرتی تھیں اور ان سے ہٹنا گناہ جیسا لگتا تھا۔</p>
+            <p>میرے اردگرد کے لوگ نہیں جانتے تھے کہ یہ کیا ہے۔ جب میں نے ایک سہیلی کو اپنی ماہواری اور اپنی تکلیف کے بارے میں بتایا تو اس نے کہا، "ہاں، پیڈ پہننا تو بے آرام ہوتا ہے، مگر ماہواری میں درد تو نہیں ہوتا، ہے نا؟" میں روز بیس منٹ ٹریڈمل پر چلتی اور کوئی خاص فرق نظر نہ آتا۔ بہت عرصے تک میں یہی سمجھتی رہی کہ مجھ میں نظم و ضبط کی کمی ہے۔ ایسا نہیں تھا۔ میرا جسم میرے خلاف کام کر رہا تھا۔</p>
+            <p>لوگ کہتے ہیں کہ ماہواری ایک قدرتی عمل ہے جو ہر عورت کو ہوتا ہے، اور یہ بات سچ ہے۔ مگر یہ ایک ممنوعہ موضوع بھی ہے۔ ہماری زبان میں اس سے جڑے بیشتر الفاظ یا تو موجود ہی نہیں، یا صرف سرگوشی میں بولے جاتے ہیں۔ پی سی او ایس کو اردو میں بیان کرنا آسان نہیں۔ میری تعلیم زبان اور لسانیات میں ہے، اس لیے میں جانتی ہوں کہ اس کا مطلب کیا ہے۔ جب کسی چیز کے لیے الفاظ نہ ہوں تو ہم مدد نہیں مانگ سکتے، اور اپنی بات سمجھا بھی نہیں سکتے۔</p>
+            <p>یہاں میں نے اس مشکل تشخیص کو ایک مقصد دیا ہے۔ میں زبان کی اس کمی کا مطالعہ کر رہی ہوں، کیونکہ مسئلے کا یہی حصہ ہے جس پر میں کام کر سکتی ہوں۔</p>
+          </div>
+          <div class="prose" id="story-ro" lang="ur-Latn" hidden>
+            <h3>Main ne Mahwari kyun banayi</h3>
+            <p>Das saal ki umar tak main dubli patli bachi thi. Main jitne bhi strawberry milkshake pi leti, mera wazan nahin barhta tha, aur main bohat peeti thi.</p>
+            <p>Phir bulooghat aayi. Barah saal ki umar mein meri mahwari shuru hui, aur us ke saath masail bhi. Har mahine aik hafta pait phoolne, shadeed dard aur kai doosri alamaat mein guzarta. Main mushkil mein rahi, magar main ne ise apni qismat samajh kar qubool kar liya, kyunke mujhe lagta tha ke yeh mamool ki baat hai. Chand saal baad dard naqabil-e-bardasht ho gaya to main doctor ke paas gayi. Pandrah saal ki umar mein mujhe bataya gaya ke mujhe PCOS hai.</p>
+            <p>Yeh kya tha? Polycystic ovarian syndrome. Main itna samjhi ke is ka matlab bohat si cysts hain aur is ka taalluq bayza-daniyon se hai. Magar yeh asal mein tha kya? Main ne aisa kya ghalat kiya tha ke mujhe yeh ho gaya? Kaun si dawa ise khatam kar sakti thi? Phir mujhe maloom hua ke koi dawa ise khatam nahin karti, aur is par tehqeeq aur tawajjo bohat kam rahi hai.</p>
+            <p>Main ne ghanton internet par hayatiyaat ki woh istilahaat parhin jo mujhe mushkil se samajh aati thin. Main khud ko theek karna chahti thi, kyunke us waqt yeh maanna mushkil tha ke yeh theek hone wali cheez nahin. Mujhe is ke saath jeene ke tareeqe dhoondne the aur ise apni shanakht ka hissa maanna tha. Yeh aasaan nahin tha, kyunke ird-gird ki desi khawateen khoobsurti ke meyaar tay karti thin aur un se hatna gunah jaisa lagta tha.</p>
+            <p>Mere ird-gird ke log nahin jaante the ke yeh kya hai. Jab main ne aik saheli ko apni mahwari aur apni takleef ke baare mein bataya to us ne kaha, "Haan, pad pehenna to be-aaram hota hai, magar mahwari mein dard to nahin hota, hai na?" Main roz bees minute treadmill par chalti aur koi khaas farq nazar na aata. Bohat arse tak main yehi samajhti rahi ke mujh mein nazm-o-zabt ki kami hai. Aisa nahin tha. Mera jism mere khilaaf kaam kar raha tha.</p>
+            <p>Log kehte hain ke mahwari aik qudrati amal hai jo har aurat ko hota hai, aur yeh baat sach hai. Magar yeh aik mamnooa mauzu bhi hai. Hamari zubaan mein is se jude beshtar alfaaz ya to maujood hi nahin, ya sirf sargoshi mein bole jaate hain. PCOS ko Urdu mein bayan karna aasaan nahin. Meri taleem zubaan aur lisaniyaat mein hai, is liye main jaanti hoon ke is ka matlab kya hai. Jab kisi cheez ke liye alfaaz na hon to hum madad nahin maang sakte, aur apni baat samjha bhi nahin sakte.</p>
+            <p>Yahan main ne is mushkil tashkhees ko aik maqsad diya hai. Main zubaan ki is kami ka mutalia kar rahi hoon, kyunke masle ka yehi hissa hai jis par main kaam kar sakti hoon.</p>
+          </div>
+        </div>
+
+      <div class="here">
+        <div><h3><a href="#words">The words</a></h3><p>A lexicon of PMOS terms in Urdu, Roman Urdu and English, with the words people actually say and why some of them are missing.</p></div>
+        <div><h3><a href="#research">The research</a></h3><p>A test of how machine translation handles these terms, a demo of the Roman Urdu spelling problem, and the questions I want to ask next.</p></div>
+        <div><h3><a href="#voices">The voices</a></h3><p>Anonymous testimonials from the PCOD support group I had in school.</p></div>
+      </div>
+      <p class="notice">I am not a doctor, and nothing here is medical advice. Please talk to a qualified clinician about your own health.</p>
+    </div>
+  </section>
+
+  <!-- WORDS -->
+  <section id="view-words" data-view="words" hidden>
+    <div class="wrap pad">
+      <p class="eyebrow">Lexicon, first draft</p>
+      <h2>Words <span class="urdu" lang="ur" dir="rtl" style="color:var(--accent);font-size:.9em;margin-left:8px">الفاظ</span></h2>
+      <p class="lede" id="wordsLede"></p>
+      <div class="wtools">
+        <label class="field" for="q"><span class="eyebrow">Search in English, Urdu or Roman Urdu</span>
+          <input type="search" id="q" autocomplete="off" placeholder="Try mahvari, muhase or dard">
+        </label>
+        <div class="filters" id="filters" role="group" aria-label="Filter by how well Urdu covers the term"></div>
+        <p class="sync" id="qNote" role="status" aria-live="polite"></p>
+      </div>
+      <div class="wgrid" id="wordGrid"></div>
+      <div class="exports panel">
+        <h3>Take the data with you</h3>
+        <p class="sub">The lexicon is a small dataset. Copy it as a spreadsheet file, along with any wordings you have added on this device.</p>
+        <div class="row">
+          <button type="button" class="btn" id="copyLex">Copy lexicon as CSV</button>
+          <button type="button" class="btn ghost" id="copyMine">Copy my words as CSV</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="view-research" data-view="research" hidden>
+    <div class="wrap pad">
+      <p class="eyebrow">Research</p>
+      <h2>Can a machine say it in Urdu?</h2>
+      <p class="lede">If Urdu lacks everyday words for PMOS, translation tools should struggle with them. This is a small test of that idea, and it is still in progress.</p>
+
+      <div class="rsec" style="padding-top:28px">
+        <h3>The experiment</h3>
+        <p class="sub" style="max-width:66ch">Twenty English sentences a woman with PMOS might say, each translated into Urdu by Google Translate. I read each translation and rate it as natural, unnatural or wrong. The ratings are one person's judgement.</p>
+        <div class="mtres" id="mtRes"></div>
+        <div class="mt-tools">
+          <h4 style="font-size:22px">The twenty sentences</h4>
+          <p class="sync" id="mtSync" role="status" aria-live="polite"></p>
+        </div>
+        <p class="small muted" id="sysNote" style="margin-top:10px;max-width:66ch"></p>
+        <div class="mt-list" id="mtList"></div>
+        <div class="row" style="margin-top:18px"><button type="button" class="btn ghost" id="copyMT">Copy results as CSV</button></div>
+      </div>
+
+      <div class="rsec">
+        <h3>What makes it hard</h3>
+        <div class="four">
+          <div><h4>Few everyday medical words</h4><p>Search engines, chatbots and symptom checkers learn from what people write. When a word is missing, or only whispered, there is little written Urdu to learn from.</p></div>
+          <div><h4>Roman Urdu has no standard spelling</h4><p>Many people type Urdu in Latin letters, and one word can be spelled several ways. A system that knows one spelling misses the others.</p></div>
+          <div><h4>Urdu and English in one sentence</h4><p>People mix the two, as in "mera hormones ka masla hai". A tool built for one language at a time can fail on the mix.</p></div>
+          <div><h4>Euphemism</h4><p>Periods are often called "the month" or "those days". A system that only knows the word mahwari would miss most of how women refer to them.</p></div>
+        </div>
+      </div>
+
+      <div class="rsec">
+        <h3>One word, many spellings</h3>
+        <p class="sub" style="max-width:66ch">The search on the Words page matches spellings by sound pattern. It keeps the first letter, drops vowels and the letter h, treats w and v as the same, and merges repeated letters. It is crude, and it shows the idea.</p>
+        <div class="panel narrow">
+          <p class="eyebrow">Five spellings of one word</p>
+          <div class="skels" id="skelEx"></div>
+          <label class="field" for="spellIn">Type a spelling
+            <input type="text" id="spellIn" autocomplete="off" placeholder="mohase, mahvari, dard">
+          </label>
+          <div id="spellOut" style="margin-top:14px"></div>
+        </div>
+      </div>
+
+      <div class="rsec">
+        <h3>Open questions</h3>
+        <ul>
+          <li>Which words do women use at home, and which at the clinic?</li>
+          <li>Do the words differ across Urdu, Punjabi, Sindhi, Pashto, Saraiki and Balochi?</li>
+          <li>What should an Urdu name for PMOS be, and who decides?</li>
+          <li>When a word exists but is never said aloud, does it count as a word?</li>
+        </ul>
+      </div>
+
+      <div class="rsec">
+        <h3>Further reading</h3>
+        <ul class="reading">
+          <li><a href="https://arxiv.org/abs/2004.00088" target="_blank" rel="noopener noreferrer">A Clustering Framework for Lexical Normalization of Roman Urdu</a><span class="org">arXiv, on the spelling problem</span></li>
+          <li><a href="https://aclanthology.org/2026.abjadnlp-1.55" target="_blank" rel="noopener noreferrer">U-MIRAGE: Benchmarking Chain-of-Thought Reasoning for Urdu Medical QA</a><span class="org">ACL Anthology, on Urdu medical language models</span></li>
+        </ul>
+        <p class="small muted" style="margin-top:12px">I have not read these in full, so check them before citing them.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOICES -->
+  <section id="view-voices" data-view="voices" hidden>
+    <div class="wrap pad">
+      <p class="eyebrow">From my school support group</p>
+      <h2>Voices</h2>
+      <p class="lede">When I was in school I had a PCOD support group. I collected testimonials from people who lived with it and posted them anonymously. Some of them are here. PCOD is another name people use for PCOS.</p>
+
+      <form id="voiceForm" class="panel narrow" style="margin-top:26px" hidden>
+        <h3>Add a testimonial</h3>
+        <p class="sub">Only you can see this form. New testimonials appear after the ones already on the page. Add only words people agreed to share, and remove names or details that could identify them.</p>
+        <label class="field" for="voiceTag">Theme
+          <select id="voiceTag"><option>Family and weight</option><option>Periods and pain</option><option>Bloating and other symptoms</option><option>Weight</option><option>Acne and self-esteem</option><option>Other</option></select>
+        </label>
+        <label class="field" for="voiceText" style="margin-top:14px">Testimonial
+          <textarea id="voiceText" dir="auto" maxlength="2000" placeholder="Type or paste one testimonial, in any language."></textarea>
+        </label>
+        <div class="row" style="margin-top:14px">
+          <button type="submit" class="btn" id="voiceAdd">Add testimonial</button>
+          <span class="sync" id="voiceSync" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+
+      <div id="voiceList"></div>
+    </div>
+  </section>
+</main>
+
+<div class="foot">
+  <div class="wrap">
+    <p>Mahwari is not medical advice. To read about the condition from medical sources, see <a href="https://www.nichd.nih.gov/health/topics/pcos" target="_blank" rel="noopener noreferrer">NICHD</a> or the <a href="https://www.nhs.uk/conditions/polycystic-ovary-syndrome-pcos/" target="_blank" rel="noopener noreferrer">NHS</a>.</p>
+  </div>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+var $=function(s){return document.querySelector(s)};
+var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+/* ---------- lexicon (first draft, to be checked with Urdu speakers) ---------- */
+var LV_ORDER=['direct','formal','english','none'];
+var LV_LABEL={direct:'Everyday word',formal:'Formal word only',english:'English word used',none:'No word'};
+var GROUPS=['Periods and fertility','Hormones and body','Skin and hair','Energy and mood','At the clinic','Names of the condition'];
+var LEX=[
+ {id:'period',g:'Periods and fertility',en:'Period (menstruation)',ur:'ماہواری',ro:'mahwari',lv:'direct',say:[['mahina','ro'],['date','ro'],['un dino, meaning those days','ro']],why:'The word exists and is understood. The gap is in saying it aloud. People reach for "the month", "the date" or "those days", so a system that only knows the word mahwari will miss most of how women refer to it.'},
+ {id:'irregular',g:'Periods and fertility',en:'Irregular periods',ur:'بے قاعدہ ماہواری',ro:'be-qaida mahwari',lv:'formal',say:[['date aage peeche hona','ro']],why:'The textbook phrase is rarely what is said. Everyday speech describes the date moving. To confirm with speakers.'},
+ {id:'missed',g:'Periods and fertility',en:'Periods stopping for months',ur:'ماہواری رک جانا',ro:'mahwari ruk jana',lv:'direct',say:[['mahina nahin aaya','ro']],why:'Described as something that stops. There is no everyday word for a long gap as a pattern.'},
+ {id:'pelvic',g:'Periods and fertility',en:'Period or pelvic pain',ur:'ماہواری کا درد',ro:'mahwari ka dard',lv:'direct',say:[['pait dard','ro'],['kamar dard','ro']],why:'People often name the body part, stomach or back, and not the cause. A search for "mahwari ka dard" would miss "pait dard".'},
+ {id:'conceive',g:'Periods and fertility',en:'Trouble conceiving',ur:'حمل ٹھہرنے میں مشکل',ro:'hamal thehrne mein mushkil',lv:'formal',say:[],why:'Often spoken about indirectly, or not at all. This entry needs the most care, because the words carry family pressure.'},
+ {id:'cramps',g:'Periods and fertility',en:'Cramps',ur:'مروڑ',ro:'marod',lv:'direct',say:[['pait mein marod','ro']],why:'A vivid everyday word exists. It is used for any stomach cramp, so it does not mark the pain as menstrual.'},
+ {id:'heavy',g:'Periods and fertility',en:'Heavy bleeding',ur:'زیادہ خون آنا',ro:'zyada khoon aana',lv:'direct',say:[],why:'A plain description. There is no word for heavy periods as a medical problem, which may make them easier to treat as normal.'},
+ {id:'spotting',g:'Periods and fertility',en:'Spotting',ur:'داغ لگنا',ro:'daagh lagna',lv:'direct',say:[],why:'Described as a stain. To confirm with speakers.'},
+ {id:'ovulation',g:'Periods and fertility',en:'Ovulation',ur:'بیضہ ریزی',ro:'bayza rezi',lv:'formal',say:[['ovulation','en']],why:'The Urdu term belongs to textbooks. Most women meet the idea in English, if at all.'},
+ {id:'infertility',g:'Periods and fertility',en:'Infertility',ur:'بانجھ پن',ro:'baanjh pan',lv:'direct',say:[],why:'The everyday word is harsh and is used as a label for a woman. A word can exist and still be one people cannot bear to say.'},
+ {id:'hormones',g:'Hormones and body',en:'Hormones',ur:'ہارمونز',ro:'hormones',lv:'english',say:[['hormones','en']],why:'The word is borrowed and then written in Urdu script, so both Urdu and Latin spellings appear in text.'},
+ {id:'imbalance',g:'Hormones and body',en:'Hormonal imbalance',ur:'ہارمونز کا مسئلہ',ro:'hormones ka masla',lv:'english',say:[['hormones kharab hain','ro']],why:'A mixed phrase, with an English noun inside an Urdu frame. This is how most people say it.'},
+ {id:'ovary',g:'Hormones and body',en:'Ovary',ur:'بیضہ دانی',ro:'bayza-dani',lv:'formal',say:[['ovary','en']],why:'The Urdu word is formal and rarely heard outside textbooks. In conversation, "ovary" is the word.'},
+ {id:'cyst',g:'Hormones and body',en:'Cyst',ur:'سسٹ',ro:'cyst',lv:'english',say:[['cyst','en']],why:'No everyday Urdu word. The old name PCOS put cysts in the title, which the new name drops.'},
+ {id:'insulin',g:'Hormones and body',en:'Insulin resistance',ur:'',ro:'',lv:'none',say:[['sugar ka masla','ro']],why:'No everyday word. It may be described as a sugar problem, which could blur it with diabetes. To confirm with speakers.'},
+ {id:'weight',g:'Hormones and body',en:'Weight gain',ur:'وزن بڑھنا',ro:'wazan barhna',lv:'direct',say:[['moti ho jana','ro']],why:'Everyday words for weight are blunt and often judging. They leave little room for the idea that a medical condition could be involved.'},
+ {id:'metabolism',g:'Hormones and body',en:'Metabolism',ur:'میٹابولزم',ro:'metabolism',lv:'english',say:[['metabolism','en']],why:'Borrowed whole. The new name PMOS has "metabolic" in it, so this gap now sits inside the name of the condition.'},
+ {id:'diabetes',g:'Hormones and body',en:'Diabetes',ur:'ذیابیطس',ro:'ziabetus',lv:'formal',say:[['sugar','en']],why:'The formal word is used in writing. In speech the condition is called "sugar".'},
+ {id:'thyroid',g:'Hormones and body',en:'Thyroid',ur:'تھائیرائیڈ',ro:'thyroid',lv:'english',say:[['thyroid','en']],why:'Borrowed whole, with no Urdu alternative in everyday use.'},
+ {id:'acne',g:'Skin and hair',en:'Acne',ur:'مہاسے',ro:'muhase',lv:'direct',say:[['daane','ro'],['chehre par daane','ro']],why:'A clear word exists. Women often say "daane", which also covers other spots.'},
+ {id:'hairgrowth',g:'Skin and hair',en:'Extra hair on the face or body',ur:'زائد بال',ro:'zaid baal',lv:'formal',say:[['chehre par baal','ro']],why:'The medical term, hirsutism, has no everyday Urdu form. "Zaid baal" is formal, and women describe where the hair is.'},
+ {id:'hairthin',g:'Skin and hair',en:'Hair thinning or loss',ur:'بالوں کا گرنا',ro:'balon ka girna',lv:'direct',say:[['baal jhadna','ro']],why:'Both phrases are everyday words. Which one women use may differ by region.'},
+ {id:'darkpatches',g:'Skin and hair',en:'Dark patches on the skin',ur:'',ro:'',lv:'none',say:[['gardan par kaale nishaan','ro']],why:'There is no everyday name, only a description of where the marks are.'},
+ {id:'fatigue',g:'Energy and mood',en:'Tiredness',ur:'تھکاوٹ',ro:'thakawat',lv:'direct',say:[['kamzori','ro']],why:'"Kamzori" means weakness. Tiredness is often called weakness, which may be understood differently from fatigue.'},
+ {id:'poorsleep',g:'Energy and mood',en:'Poor sleep',ur:'نیند کی کمی',ro:'neend ki kami',lv:'direct',say:[['neend nahin aati','ro']],why:'Everyday phrases exist. Nothing special to note here, which is useful: not every symptom has a gap.'},
+ {id:'fog',g:'Energy and mood',en:'Brain fog',ur:'',ro:'',lv:'none',say:[['dimagh nahin chalta','ro']],why:'An English term for a feeling. Urdu speakers describe it with a phrase, if they say it at all. To confirm with speakers.'},
+ {id:'anxiety',g:'Energy and mood',en:'Anxiety',ur:'گھبراہٹ',ro:'ghabrahat',lv:'direct',say:[['tension','en']],why:'"Ghabrahat" covers nervousness and panic. "Tension" is the English word many people use for stress and worry.'},
+ {id:'lowmood',g:'Energy and mood',en:'Low mood',ur:'اداسی',ro:'udasi',lv:'direct',say:[['dil udaas','ro'],['depression','en']],why:'"Udasi" means sadness, and "depression" is the English word. The two do not map neatly onto each other.'},
+ {id:'moodswings',g:'Energy and mood',en:'Mood swings',ur:'مزاج میں اتار چڑھاؤ',ro:'mizaj mein utaar chadhaao',lv:'english',say:[['mood swings','en']],why:'A Urdu phrase exists, but most people say the English one.'},
+ {id:'bloating',g:'Energy and mood',en:'Bloating',ur:'پیٹ پھولنا',ro:'pait phoolna',lv:'direct',say:[['gas','en']],why:'Often called "gas", which names a cause and not the feeling.'},
+ {id:'cravings',g:'Energy and mood',en:'Cravings',ur:'کھانے کی طلب',ro:'khane ki talab',lv:'formal',say:[['meetha khane ka dil karna','ro']],why:'"Talab" is a formal word. Everyday speech says what you want, such as something sweet.'},
+ {id:'stress',g:'Energy and mood',en:'Stress',ur:'ذہنی دباؤ',ro:'zehni dabao',lv:'formal',say:[['tension','en']],why:'The Urdu phrase is formal. "Tension" does the everyday work, for stress and anxiety alike.'},
+ {id:'diagnosis',g:'At the clinic',en:'Diagnosis',ur:'تشخیص',ro:'tashkhees',lv:'formal',say:[['doctor ne bataya','ro']],why:'"Tashkhees" is a formal word. People say what the doctor told them.'},
+ {id:'ultrasound',g:'At the clinic',en:'Ultrasound',ur:'الٹراساؤنڈ',ro:'ultrasound',lv:'english',say:[['ultrasound','en']],why:'Borrowed whole, with no Urdu alternative in use.'},
+ {id:'pill',g:'At the clinic',en:'Birth control pill',ur:'مانع حمل گولی',ro:'maana-e-hamal goli',lv:'formal',say:[['goli','ro']],why:'The formal name states contraception, which may make the word hard to say at home, whatever the pill is prescribed for.'},
+ {id:'pcos',g:'Names of the condition',en:'PCOS',ur:'',ro:'',lv:'none',say:[['PCOS, in English letters','en']],why:'There is no Urdu name. The condition is spoken of in English, if at all, so there is nothing to type into a search box in Urdu.'},
+ {id:'pmos',g:'Names of the condition',en:'PMOS',ur:'',ro:'',lv:'none',say:[],why:'The new name, announced in 2026, has no Urdu form either. Someone has to decide whether to translate it, transliterate it or coin a term. That is an open question.'}
+];
+var BY={};
+function tokens(s){return String(s).toLowerCase().split(/[^a-z]+/).filter(Boolean)}
+function skel(w){
+  w=String(w).toLowerCase().replace(/[^a-z]/g,'');
+  if(!w)return '';
+  w=w.replace(/ph/g,'f').replace(/w/g,'v');
+  var out=w.charAt(0)+w.slice(1).replace(/[haeiouy]/g,'');
+  return out.replace(/(.)\1+/g,'$1');
+}
+LEX.forEach(function(e){
+  BY[e.id]=e;
+  e._k=tokens([e.ro,e.en].concat(e.say.map(function(s){return s[0]})).join(' ')).map(skel);
+});
+function matches(e,q){
+  q=q.trim();if(!q)return true;
+  var ql=q.toLowerCase();
+  if(e.en.toLowerCase().indexOf(ql)>=0||e.ro.toLowerCase().indexOf(ql)>=0||(e.ur&&e.ur.indexOf(q)>=0))return true;
+  var qk=tokens(q).map(skel).filter(function(k){return k.length>=2});
+  if(!qk.length)return false;
+  return qk.every(function(k){return e._k.some(function(x){return k.length<=2?x===k:x.indexOf(k)===0})});
+}
+function counts(){var c={direct:0,formal:0,english:0,none:0};LEX.forEach(function(e){c[e.lv]++});return c}
+
+/* ---------- translation test material ---------- */
+var TESTS=[
+ {id:'s01',en:'My periods are irregular.'},
+ {id:'s02',en:'I have not had a period for three months.'},
+ {id:'s03',en:'I have polycystic ovary syndrome.'},
+ {id:'s04',en:'The doctor said I have a hormonal imbalance.'},
+ {id:'s05',en:'I have insulin resistance.'},
+ {id:'s06',en:'I have excess hair growth on my face.'},
+ {id:'s07',en:'My hair is thinning.'},
+ {id:'s08',en:'I have acne that does not go away.'},
+ {id:'s09',en:'I have dark patches of skin on my neck.'},
+ {id:'s10',en:'I feel tired all the time.'},
+ {id:'s11',en:'I have brain fog and cannot concentrate.'},
+ {id:'s12',en:'I have mood swings before my period.'},
+ {id:'s13',en:'I feel anxious and low.'},
+ {id:'s14',en:'I get strong cravings for sweet food.'},
+ {id:'s15',en:'I feel bloated.'},
+ {id:'s16',en:'I have pain in my pelvis during my period.'},
+ {id:'s17',en:'I gained weight even though I eat carefully.'},
+ {id:'s18',en:'There are cysts on my ovaries.'},
+ {id:'s19',en:'It is not my fault that I cannot lose weight.'},
+ {id:'s20',en:'PCOS is now called polyendocrine metabolic ovarian syndrome.'}
+];
+var SYS={
+  google:{name:'Google Translate',note:'Paste each result from Google Translate into the box, then rate it.'}
+};
+var RLABEL={1:'Natural',2:'Unnatural',3:'Wrong'};
+
+/* ---------- shared store with local fallback ---------- */
+var LKEY='mahwari.research.v1',WKEY='mahwari.words.v1';
+var db=null,mode='loading',canWrite=false;
+var MT={},VOICES=[],myWords={};
+var VOICES_BASE=[{"id": "v01", "tag": "Family and weight", "text": "Whenever I talk about my weight or PCOS, my grandmother tells me to join the gym. She brings up my cousin, who started exercising and lost weight, and asks why I can't do the same.\n\nI don't think she understands that our bodies aren't the same. My cousin might have had a completely different experience with her hormones, metabolism and health. I can exercise, eat well and take care of myself, but that doesn't mean my body will respond in exactly the same way.\n\nWhat hurts is that every conversation about my health eventually becomes a conversation about losing weight."}, {"id": "v02", "tag": "Family and weight", "text": "My mother tells me that everyone gains weight if they stop being active, and that I should just control my portions and exercise more.\n\nI've tried explaining that PCOS is a hormonal and metabolic condition, but I feel like she hears it as an excuse for not wanting to put in effort.\n\nI wish she understood that I'm not asking her to excuse unhealthy habits. I'm asking her to understand that my body has different challenges, and that I shouldn't have to prove how hard I'm trying by constantly losing weight."}, {"id": "v03", "tag": "Family and weight", "text": "One of the most frustrating things about having PCOS is that people assume I must be unhappy with my appearance because I've gained weight.\n\nI'm not necessarily trying to become thinner. I don't spend my days wishing I looked like someone else. What concerns me is my irregular period, hormonal acne, bloating and the uncertainty around my health.\n\nI want to feel healthy. I want my hormones and menstrual cycle to be better managed. I don't want every conversation with my family to end with someone telling me to lose a few kilos."}, {"id": "v04", "tag": "Family and weight", "text": "I don't dislike exercise. I understand that movement can be beneficial for PCOS. But my family treats the gym as though it is a cure.\n\nIf I say I'm struggling with bloating, they tell me to exercise. If I mention weight gain, they tell me to exercise. If I complain about irregular periods, somehow the conversation still comes back to exercise.\n\nI wish people understood that PCOS management is more complicated than that. Exercise is one part of managing a condition, not a guarantee that every symptom will disappear."}, {"id": "v05", "tag": "Family and weight", "text": "At family gatherings, relatives comment on how much weight I've gained. Sometimes they compare old pictures of me with how I look now.\n\nThey don't see the hormonal changes, the breakouts, the unpredictable periods or the frustration of not understanding what's happening inside my body. They just see that I've gained weight.\n\nI wish my family would ask how I'm feeling instead of commenting on how I look."}, {"id": "v06", "tag": "Family and weight", "text": "I think my mother genuinely wants to help me. She suggests diets, walking, gym memberships and home remedies because that's what she knows.\n\nBut sometimes I need her to listen rather than immediately offer another weight-loss solution. I need her to understand that PCOS affects different women differently, and that what worked for someone else might not work the same way for me.\n\nI don't need my family to become doctors. I just need them to believe me when I tell them I'm struggling."}, {"id": "v07", "tag": "A letter to Ammi", "text": "Ammi, I know you and Nani suggest going to the gym because you want me to be healthy, and I genuinely understand that. But I want you to understand that PCOS isn't simply a matter of gaining weight because someone isn't exercising enough.\n\nIt's a hormonal and metabolic condition, and it affects different women differently. Just because my cousin was able to lose weight through exercise doesn't mean my body will necessarily respond in the same way. We have different bodies, different hormones and potentially different underlying health issues.\n\nI also want you to understand that losing weight isn't necessarily my main goal. I'm more concerned about managing my PCOS, understanding why my periods are irregular, dealing with hormonal changes and feeling healthy overall.\n\nI'm not against exercising or eating healthily. I actually want to develop healthy habits. But I don't want every conversation about my health to turn into a discussion about how much weight I should lose.\n\nSometimes I just want you to understand what I'm experiencing rather than compare me to someone else. I need support, not another reminder to go to the gym."}, {"id": "v08", "tag": "Periods and pain", "text": "My periods are long, painful and extremely heavy. Sometimes I need to use the bathroom every hour because of the bleeding. I constantly worry about having an accident when I'm outside or at work."}, {"id": "v09", "tag": "Periods and pain", "text": "My periods have been extremely painful since I first started menstruating. The cramps can be so intense that they interfere with my ability to work, study and carry on with normal activities."}, {"id": "v10", "tag": "Periods and pain", "text": "I had irregular periods from a young age, but nobody connected them with my other symptoms. For years, I thought this was simply how my body worked. It took a long time before someone considered PCOS."}, {"id": "v11", "tag": "Periods and pain", "text": "My periods have never been particularly predictable. Sometimes I go several months without one, and other times I experience prolonged or frequent bleeding. Not knowing when my next period will come makes planning everyday activities difficult."}, {"id": "v12", "tag": "Bloating and other symptoms", "text": "Alongside my irregular and painful periods, I experience excessive bloating, breakouts, rapid weight gain and fatigue. It affects whether I feel comfortable going out and getting through an ordinary day."}, {"id": "v13", "tag": "Bloating and other symptoms", "text": "I experience constant bloating and abdominal discomfort. Sometimes my stomach looks and feels completely different throughout the day. It can be uncomfortable enough that I don't feel like wearing my usual clothes."}, {"id": "v14", "tag": "Weight", "text": "I've struggled with my weight for years. I've tried different diets, exercise routines and weight-loss programmes, but the weight kept coming back. It was exhausting to feel like my body wasn't responding to the effort I was putting in."}, {"id": "v15", "tag": "Weight", "text": "I started gaining weight even though I was eating relatively healthily and exercising regularly. I initially blamed myself and thought I wasn't trying hard enough. It took a long time to realise there could be an underlying hormonal issue."}, {"id": "v16", "tag": "Acne and self-esteem", "text": "My acne became so persistent that I started feeling uncomfortable going out. It wasn't just about having breakouts. It changed how I felt about my appearance and made me lose confidence."}, {"id": "v17", "tag": "Acne and self-esteem", "text": "I struggled with cystic acne along my cheeks and jawline. I tried different skincare products, but nothing seemed to make a lasting difference. It was frustrating because I felt like I was doing everything right and still couldn't get my skin under control."}];
+function loadLocal(){try{var o=JSON.parse(window.localStorage.getItem(LKEY));if(o&&o.mt)MT=o.mt}catch(e){}}
+function saveLocal(){try{window.localStorage.setItem(LKEY,JSON.stringify({mt:MT}))}catch(e){}}
+function loadWords(){
+  try{
+    var o=JSON.parse(window.localStorage.getItem(WKEY));
+    if(o){myWords=o;return}
+    var old=JSON.parse(window.localStorage.getItem('cadence.v1'));
+    if(old&&!old.example&&old.words)myWords=old.words;
+  }catch(e){}
+}
+function saveWords(){try{window.localStorage.setItem(WKEY,JSON.stringify(myWords))}catch(e){toast('Your browser would not save this.')}}
+function editable(){return mode==='local'||(mode==='shared'&&canWrite)}
+function cleanMT(b){b=b||{};var r=+b.r;return {out:String(b.out||'').slice(0,400),r:(r===1||r===2||r===3)?r:0,note:String(b.note||'').slice(0,200)}}
+function blankMT(d){return !d||(!d.out&&!d.r&&!d.note)}
+function cleanVoice(id,b){b=b||{};return {id:id,text:String(b.text||'').slice(0,2000),at:+b.at||0,tag:String(b.tag||'').slice(0,60),title:String(b.title||'').slice(0,80)}}
+var chains={},timers={};
+function onWriteErr(e){
+  if(e&&e.code==='invalid_argument'){canWrite=false;renderMT();renderVoices();toast('You can view this page but not change it.')}
+  else toast('Could not save. Check your connection and try again.');
+  setSync('Not saved.');
+}
+function setSync(t){$('#mtSync').textContent=t}
+function persistMT(key){
+  var d=MT[key];
+  if(blankMT(d))delete MT[key];
+  if(mode==='local'){saveLocal();setSync('Saved on this device only.');return}
+  if(mode!=='shared'||!canWrite)return;
+  var p=key.split('_');
+  chains[key]=(chains[key]||Promise.resolve()).then(function(){
+    var cur=MT[key];
+    return blankMT(cur)?db.doc('mt/'+key).delete():db.doc('mt/'+key).set({sid:p[0],sys:p[1],out:cur.out||'',r:cur.r||0,note:cur.note||''});
+  }).then(function(){setSync('Saved.')},onWriteErr);
+}
+function persistSoon(key){clearTimeout(timers[key]);timers[key]=setTimeout(function(){persistMT(key);renderMTResults()},700)}
+function ready(m){
+  mode=m;
+  setSync(mode==='shared'?(canWrite?'Your ratings save to this page.':''):'Ratings you add here stay on this device.');
+  renderMT();renderMTResults();renderVoices();
+}
+function boot(){
+  var c=window.claude;
+  if(!c||typeof c.use!=='function'){loadLocal();ready('local');return}
+  Promise.all([c.use('db'),c.use('user')]).then(function(a){
+    if(!a[0]){loadLocal();ready('local');return}
+    db=a[0];var user=a[1];
+    return Promise.all([
+      (user&&user.canEdit)?user.canEdit().catch(function(){return true}):Promise.resolve(true),
+      db.collection('mt').get(),
+      db.collection('voices').get().catch(function(){return {docs:[]}})
+    ]).then(function(r){
+      canWrite=r[0]!==false;
+      MT={};r[1].docs.forEach(function(d){MT[d.id]=cleanMT(d.data())});
+      var baseIds={};VOICES_BASE.forEach(function(v){baseIds[v.id]=1});
+      VOICES=r[2].docs.map(function(d){return cleanVoice(d.id,d.data())}).filter(function(v){return v.text&&!baseIds[v.id]}).sort(function(a,b){return a.at-b.at});
+      ready('shared');
+    });
+  }).catch(function(){db=null;loadLocal();ready('local')});
+}
+
+/* ---------- helpers ---------- */
+function toast(msg){
+  var t=$('#toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('show')},2400);
+}
+function copyText(text,okMsg){
+  var fallback=function(){
+    var ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');
+    ta.style.cssText='position:fixed;left:-9999px;top:0';document.body.appendChild(ta);ta.select();
+    var ok=false;try{ok=document.execCommand('copy')}catch(e){}
+    document.body.removeChild(ta);
+    toast(ok?okMsg:'Could not copy from this view.');
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){toast(okMsg)},fallback);
+  }else fallback();
+}
+function csvCell(s){s=String(s==null?'':s);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}
+function toCSV(rows){return rows.map(function(r){return r.map(csvCell).join(',')}).join('\n')}
+
+/* ---------- home ---------- */
+function renderGap(){
+  var c=counts(),n=LEX.length,none=n-c.direct;
+  $('#gapHead').textContent=none+' of '+n+' terms have no everyday Urdu word.';
+  $('#gapSub').textContent='I looked at '+n+' terms around PMOS. '+c.direct+' have a word people use. The rest have a formal word nobody says, borrow the English word, or have no word at all.';
+  $('#gapBar').innerHTML=LV_ORDER.map(function(k){return c[k]?'<i class="lv-'+k+'" style="flex:'+c[k]+' 1 0" title="'+LV_LABEL[k]+': '+c[k]+'"></i>':''}).join('');
+  $('#gapLegend').innerHTML=LV_ORDER.map(function(k){return '<span><i class="ldot lv-'+k+'"></i>'+LV_LABEL[k]+' <b>'+c[k]+'</b></span>'}).join('');
+  $('#wordsLede').textContent=n+' terms around PMOS. Each is marked by whether an everyday Urdu word exists, with the words people say and the reason some are missing. This is a first draft to check with Urdu speakers.';
+}
+var URDU_HERO=$('#heroLine').textContent;
+var RO_HERO='Mujh mein nazm-o-zabt ki kami nahin thi. Mera jism mere khilaaf kaam kar raha tha.';
+function setLang(l){
+  ['en','ur','ro'].forEach(function(k){document.getElementById('story-'+k).hidden=(k!==l)});
+  var h=$('#heroLine');
+  if(l==='ro'){h.textContent=RO_HERO;h.setAttribute('lang','ur-Latn');h.dir='ltr';h.classList.remove('urdu')}
+  else{h.textContent=URDU_HERO;h.setAttribute('lang','ur');h.dir='rtl';h.classList.add('urdu')}
+}
+
+/* ---------- words ---------- */
+var lvFilter='all';
+function buildFilters(){
+  var c=counts();
+  var h='<button type="button" class="fbtn" data-lv="all" aria-pressed="true">All <span class="muted">'+LEX.length+'</span></button>';
+  LV_ORDER.forEach(function(k){h+='<button type="button" class="fbtn" data-lv="'+k+'" aria-pressed="false"><i class="ldot lv-'+k+'"></i>'+LV_LABEL[k]+' <span class="muted">'+c[k]+'</span></button>'});
+  $('#filters').innerHTML=h;
+}
+function cardHTML(e){
+  var mine=myWords[e.id]||[];
+  var terms='<div class="tr">'+(e.ur?'<span class="u urdu" lang="ur" dir="rtl">'+e.ur+'</span>':'<span class="noterm">No Urdu term</span>')+(e.ro?'<span class="ro">'+esc(e.ro)+'</span>':'')+'</div>';
+  var say=e.say.length?'<div><p class="cap">How people say it</p><div class="say">'+e.say.map(function(s){return '<span>'+esc(s[0])+'<small>'+(s[1]==='en'?'English':'Roman')+'</small></span>'}).join('')+'</div></div>':'';
+  var myl=mine.length?'<div><p class="cap">My wording</p><ul class="mylist">'+mine.map(function(m,i){return '<li><span>'+esc(m.t)+'<small>'+esc(m.l)+'</small></span><button type="button" data-del="'+e.id+':'+i+'" aria-label="Remove '+esc(m.t)+'">&times;</button></li>'}).join('')+'</ul></div>':'';
+  return '<article class="wc lv-'+e.lv+'" id="w-'+e.id+'">'+
+    '<span class="lvl"><i class="ldot"></i>'+LV_LABEL[e.lv]+'</span>'+
+    '<div class="wc-terms"><h3>'+esc(e.en)+'</h3>'+terms+'</div>'+say+
+    '<p class="why">'+esc(e.why)+'</p>'+myl+
+    '<details class="mine"><summary>Add how I say it</summary><div class="addrow">'+
+    '<input type="text" id="mw-'+e.id+'" dir="auto" maxlength="80" aria-label="How I say '+esc(e.en)+'" placeholder="In any language">'+
+    '<select id="ml-'+e.id+'" aria-label="Language"><option>Urdu</option><option>Roman Urdu</option><option>Punjabi</option><option>Sindhi</option><option>Pashto</option><option>Saraiki</option><option>Balochi</option><option>English</option><option>Other</option></select>'+
+    '<button type="button" class="btn ghost" data-add="'+e.id+'">Save</button></div></details>'+
+    '</article>';
+}
+function renderWords(){
+  var q=$('#q').value,list=LEX.filter(function(e){return (lvFilter==='all'||e.lv===lvFilter)&&matches(e,q)});
+  var h='';
+  GROUPS.forEach(function(g){
+    var items=list.filter(function(e){return e.g===g});
+    if(!items.length)return;
+    h+='<p class="wgroup">'+g+'</p>'+items.map(cardHTML).join('');
+  });
+  $('#wordGrid').innerHTML=h||'<p class="muted">No terms match. Try another spelling.</p>';
+  var note='';
+  if(q.trim()){
+    var ks=tokens(q).map(skel).filter(function(k){return k.length>=2});
+    note=list.length+(list.length===1?' term':' terms')+' found.'+(ks.length?' Spelling is matched by sound pattern: "'+q.trim()+'" becomes '+ks.join(' ')+'.':'');
+  }
+  $('#qNote').textContent=note;
+}
+function mineCount(){var n=0;Object.keys(myWords).forEach(function(k){n+=myWords[k].length});return n}
+function lexCSV(){
+  var rows=[['id','english','urdu','roman_urdu','coverage','how_people_say','note']];
+  LEX.forEach(function(e){rows.push([e.id,e.en,e.ur,e.ro,LV_LABEL[e.lv],e.say.map(function(s){return s[0]+' ('+(s[1]==='en'?'English':'Roman')+')'}).join(' | '),e.why])});
+  return toCSV(rows);
+}
+function mineCSV(){
+  var rows=[['term_id','english_term','my_wording','language']];
+  Object.keys(myWords).forEach(function(k){(myWords[k]||[]).forEach(function(m){rows.push([k,BY[k]?BY[k].en:k,m.t,m.l])})});
+  return toCSV(rows);
+}
+
+/* ---------- research: translation test ---------- */
+var curSys='google';
+function outFor(t,sys){return (MT[t.id+'_'+sys]||{}).out||''}
+function mtCard(t,i){
+  var key=t.id+'_'+curSys,d=MT[key]||{},ed=editable(),out=outFor(t,curSys);
+  var h='<article class="mt" data-key="'+key+'"><p class="eyebrow">Sentence '+(i+1)+' of '+TESTS.length+'</p><p class="src">'+esc(t.en)+'</p>';
+  if(ed)h+='<label class="field" for="out-'+t.id+'">Urdu result from '+SYS[curSys].name+'<textarea class="out-in" id="out-'+t.id+'" lang="ur" dir="rtl" maxlength="400">'+esc(out)+'</textarea></label>';
+  else h+=out?'<p class="out urdu" lang="ur" dir="rtl">'+esc(out)+'</p>':'<p class="muted small">No translation recorded yet.</p>';
+  if(ed){
+    h+='<div class="ctl"><div class="seg" role="radiogroup" aria-label="Rating for sentence '+(i+1)+'">'+[1,2,3].map(function(v){
+      return '<label><input type="radio" name="r-'+key+'" value="'+v+'" id="r-'+key+'-'+v+'"'+(d.r===v?' checked':'')+'><span>'+RLABEL[v]+'</span></label>';
+    }).join('')+'</div><button type="button" class="linkbtn" data-clr="'+key+'">Clear</button></div>'+
+    '<label class="field" for="n-'+key+'">Note<input type="text" id="n-'+key+'" maxlength="200" value="'+esc(d.note||'')+'" placeholder="What is off, and why?"></label>';
+  }else{
+    h+='<p class="badge r'+(d.r||0)+'"><i class="ldot"></i>'+(d.r?RLABEL[d.r]:'Not rated yet')+'</p>'+(d.note?'<p class="why">'+esc(d.note)+'</p>':'');
+  }
+  return h+'</article>';
+}
+function renderMT(){
+  var ed=editable(),has=TESTS.some(function(t){return outFor(t,curSys)});
+  $('#sysNote').textContent=ed?SYS[curSys].note:'';
+  $('#mtRes').hidden=!ed&&!has;
+  $('#copyMT').hidden=!ed&&!has;
+  $('#mtList').innerHTML=(ed||has)?TESTS.map(mtCard).join(''):'<p class="empty">The translations are still being collected. The results will appear here.</p>';
+}
+function tally(sys){
+  var c={1:0,2:0,3:0,0:0};
+  TESTS.forEach(function(t){var d=MT[t.id+'_'+sys]||{};c[d.r||0]++});
+  return c;
+}
+function renderMTResults(){
+  var h='';
+  Object.keys(SYS).forEach(function(sys){
+    var c=tally(sys),rated=c[1]+c[2]+c[3],n=TESTS.length;
+    h+='<div class="res"><h4>'+SYS[sys].name+'</h4><p class="small muted">'+(rated?rated+' of '+n+' rated'+(rated<n?', so these numbers are not final':''):'Not rated yet')+'</p>'+
+      '<div class="gapbar" role="img" aria-label="'+SYS[sys].name+': '+c[1]+' natural, '+c[2]+' unnatural, '+c[3]+' wrong, '+c[0]+' not rated">'+[1,2,3,0].map(function(k){return c[k]?'<i class="r'+k+'" style="flex:'+c[k]+' 1 0"></i>':''}).join('')+'</div>'+
+      '<div class="legend">'+[1,2,3].map(function(k){return '<span><i class="ldot r'+k+'"></i>'+RLABEL[k]+' <b>'+c[k]+'</b></span>'}).join('')+'<span><i class="ldot r0"></i>Not rated <b>'+c[0]+'</b></span></div></div>';
+  });
+  $('#mtRes').innerHTML=h;
+}
+function mtCSV(){
+  var rows=[['sentence_id','english','system','urdu_output','rating','note']];
+  TESTS.forEach(function(t){Object.keys(SYS).forEach(function(sys){
+    var d=MT[t.id+'_'+sys]||{};
+    rows.push([t.id,t.en,SYS[sys].name,outFor(t,sys),d.r?RLABEL[d.r]:'',d.note||'']);
+  })});
+  return toCSV(rows);
+}
+function renderSpellEx(){
+  $('#skelEx').innerHTML=['mahwari','mahvari','mehwari','mahwaari','mahwary'].map(function(w){return '<span>'+w+' &rarr; '+skel(w)+'</span>'}).join('');
+}
+function renderSpell(){
+  var v=$('#spellIn').value.trim(),out=$('#spellOut');
+  if(!v){out.innerHTML='<p class="muted small">Type a spelling to see its sound pattern and the terms it finds.</p>';return}
+  var ks=tokens(v).map(skel);
+  var hits=LEX.filter(function(e){return matches(e,v)}).slice(0,6);
+  out.innerHTML='<p class="keyline">'+esc(v)+' &rarr; '+(ks.join(' ')||'no letters')+'</p>'+
+    (hits.length?'<ul class="hits">'+hits.map(function(e){return '<li><i class="ldot lv-'+e.lv+'"></i> '+esc(e.en)+(e.ro?' <span class="muted">('+esc(e.ro)+')</span>':'')+'</li>'}).join('')+'</ul>':'<p class="muted small">No terms found.</p>');
+}
+
+/* ---------- voices ---------- */
+function renderVoices(){
+  var el=$('#voiceList'),w=(mode==='shared'&&canWrite);
+  $('#voiceForm').hidden=!w;
+  var all=VOICES_BASE.concat(VOICES),groups=[],by={};
+  all.forEach(function(v){var t=v.tag||'';if(!by[t]){by[t]=[];groups.push(t)}by[t].push(v)});
+  el.innerHTML=groups.map(function(g){
+    return (g?'<h3 class="vgroup">'+esc(g)+'</h3>':'')+'<div class="voices'+(by[g].length===1?' one':'')+'">'+by[g].map(function(v){
+      return '<figure class="voice">'+(v.title?'<h4>'+esc(v.title)+'</h4>':'')+'<p dir="auto">'+esc(v.text)+'</p><div class="who"><span>Anonymous</span>'+((w&&v.at)?'<button type="button" class="linkbtn" data-vdel="'+esc(v.id)+'">Remove</button>':'')+'</div></figure>';
+    }).join('')+'</div>';
+  }).join('');
+}
+
+/* ---------- routing ---------- */
+var TABS=['home','words','research','voices'];
+var curTab=null;
+function route(){
+  var h=(location.hash||'').replace('#','');
+  if(TABS.indexOf(h)<0)h=(h&&curTab)?curTab:'home';
+  curTab=h;
+  $$('[data-view]').forEach(function(v){v.hidden=(v.dataset.view!==h)});
+  $$('[data-tab]').forEach(function(a){if(a.dataset.tab===h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  if(h==='words')renderWords();
+  if(h==='research'){renderSpellEx();renderSpell()}
+}
+
+/* ---------- init ---------- */
+loadWords();
+renderGap();
+buildFilters();
+renderMT();renderMTResults();renderVoices();
+setSync('Loading saved ratings.');
+
+$$('input[name=lang]').forEach(function(i){i.addEventListener('change',function(){setLang(i.value)})});
+$('#q').addEventListener('input',renderWords);
+$('#filters').addEventListener('click',function(ev){
+  var b=ev.target.closest('.fbtn');if(!b)return;
+  lvFilter=b.dataset.lv;
+  $$('.fbtn').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+  renderWords();
+});
+$('#wordGrid').addEventListener('click',function(ev){
+  var add=ev.target.closest('[data-add]');
+  if(add){
+    var id=add.dataset.add,inp=document.getElementById('mw-'+id),lang=document.getElementById('ml-'+id).value,t=inp.value.trim();
+    if(!t){toast('Type a word first.');return}
+    var list=myWords[id]||[];
+    if(list.length>=5){toast('You can add up to 5 wordings for each term.');return}
+    list.push({t:t.slice(0,80),l:lang});myWords[id]=list;saveWords();renderWords();toast('Saved on this device');
+    return;
+  }
+  var del=ev.target.closest('[data-del]');
+  if(del){
+    var p=del.dataset.del.split(':'),arr=myWords[p[0]]||[];
+    arr.splice(+p[1],1);if(arr.length)myWords[p[0]]=arr;else delete myWords[p[0]];
+    saveWords();renderWords();
+  }
+});
+$('#wordGrid').addEventListener('keydown',function(ev){
+  if(ev.key==='Enter'&&ev.target.id&&ev.target.id.indexOf('mw-')===0){
+    ev.preventDefault();
+    var b=ev.target.closest('.addrow').querySelector('[data-add]');if(b)b.click();
+  }
+});
+$('#copyLex').addEventListener('click',function(){copyText(lexCSV(),'Lexicon copied as CSV')});
+$('#copyMine').addEventListener('click',function(){
+  if(!mineCount()){toast('Add a wording to a term first.');return}
+  copyText(mineCSV(),'My words copied as CSV');
+});
+$('#spellIn').addEventListener('input',renderSpell);
+
+$('#mtList').addEventListener('change',function(ev){
+  var t=ev.target;
+  if(t.name&&t.name.indexOf('r-')===0){
+    var key=t.name.slice(2);
+    MT[key]=MT[key]||{};MT[key].r=+t.value;
+    persistMT(key);renderMTResults();
+  }
+});
+$('#mtList').addEventListener('input',function(ev){
+  var id=ev.target.id||'',key=null;
+  if(id.indexOf('out-')===0){key=id.slice(4)+'_'+curSys;MT[key]=MT[key]||{};MT[key].out=ev.target.value.slice(0,400)}
+  else if(id.indexOf('n-')===0){key=id.slice(2);MT[key]=MT[key]||{};MT[key].note=ev.target.value.slice(0,200)}
+  if(key)persistSoon(key);
+});
+$('#mtList').addEventListener('click',function(ev){
+  var b=ev.target.closest('[data-clr]');if(!b)return;
+  var key=b.dataset.clr;
+  if(MT[key])MT[key].r=0;
+  $$('input[name="r-'+key+'"]').forEach(function(i){i.checked=false});
+  persistMT(key);renderMTResults();
+});
+$('#copyMT').addEventListener('click',function(){copyText(mtCSV(),'Results copied as CSV')});
+
+$('#voiceForm').addEventListener('submit',function(ev){
+  ev.preventDefault();
+  var ta=$('#voiceText'),t=ta.value.trim(),btn=$('#voiceAdd');
+  if(!t){toast('Type or paste a testimonial first.');return}
+  if(VOICES.length>=40){toast('This page holds up to 40 added testimonials.');return}
+  if(!(mode==='shared'&&canWrite))return;
+  var rec={text:t.slice(0,2000),at:Date.now(),tag:$('#voiceTag').value};
+  btn.disabled=true;$('#voiceSync').textContent='Saving.';
+  db.collection('voices').add(rec).then(function(ref){
+    VOICES.push(cleanVoice(ref.id,rec));ta.value='';
+    $('#voiceSync').textContent='Added.';renderVoices();
+  },function(e){$('#voiceSync').textContent='Not saved.';onWriteErr(e)}).then(function(){btn.disabled=false});
+});
+$('#voiceList').addEventListener('click',function(ev){
+  var b=ev.target.closest('[data-vdel]');if(!b)return;
+  if(b.dataset.armed!=='1'){
+    b.dataset.armed='1';b.textContent='Tap again to remove';
+    setTimeout(function(){if(b.isConnected){b.dataset.armed='';b.textContent='Remove'}},4000);
+    return;
+  }
+  var id=b.dataset.vdel;b.disabled=true;
+  db.doc('voices/'+id).delete().then(function(){
+    VOICES=VOICES.filter(function(v){return v.id!==id});renderVoices();toast('Testimonial removed');
+  },onWriteErr);
+});
+
+window.addEventListener('hashchange',function(){route();try{window.scrollTo(0,0)}catch(e){}});
+route();
+boot();
+})();
+</script>
+
+</body>
+</html>
